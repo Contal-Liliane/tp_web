@@ -24,39 +24,38 @@ Spring Data JPA va générer automatiquement le *modèle logique de données* (r
 #### Entités
 Les entités représentent les tables de base de données et leur mapping avec JPA.
 
-- [Medicament](src/main/java/comptoirs/entity/Medicament.java): Représente les médicaments avec leurs informations (nom, prix, stock, image URL).
-- [Dispensaire](src/main/java/comptoirs/entity/Dispensaire.java): Représente les établissements de santé qui passent commande.
-- [Commande](src/main/java/comptoirs/entity/Commande.java): Représente les commandes de médicaments.
-- [Ligne](src/main/java/comptoirs/entity/Ligne.java): Représente les lignes de commande (médicament + quantité).
-- [Categorie](src/main/java/comptoirs/entity/Categorie.java): Représente les catégories de médicaments.
+- [Medicament](src/main/java/pharmacie/entity/Medicament.java): Représente les médicaments avec leurs informations (nom, prix, stock, image URL).
+- [Dispensaire](src/main/java/pharmacie/entity/Dispensaire.java): Représente les établissements de santé qui passent commande.
+- [Commande](src/main/java/pharmacie/entity/Commande.java): Représente les commandes de médicaments.
+- [Ligne](src/main/java/pharmacie/entity/Ligne.java): Représente les lignes de commande (médicament + quantité).
+- [Categorie](src/main/java/pharmacie/entity/Categorie.java): Représente les catégories de médicaments.
 
 #### Dépôts (Repositories)
 Les dépôts gèrent l'accès aux entités via Spring Data JPA.
 
-- [MedicamentRepository](src/main/java/comptoirs/dao/MedicamentRepository.java): Interface gérant les requêtes sur les entités `Medicament`.
-- [DispensaireRepository](src/main/java/comptoirs/dao/DispensaireRepository.java): Interface gérant les requêtes sur les entités `Dispensaire`.
-- [CommandeRepository](src/main/java/comptoirs/dao/CommandeRepository.java): Interface gérant les requêtes sur les entités `Commande`.
-- [LigneRepository](src/main/java/comptoirs/dao/LigneRepository.java): Interface gérant les requêtes sur les entités `Ligne`.
+- [MedicamentRepository](src/main/java/pharmacie/dao/MedicamentRepository.java): Interface gérant les requêtes sur les entités `Medicament`.
+- [DispensaireRepository](src/main/java/pharmacie/dao/DispensaireRepository.java): Interface gérant les requêtes sur les entités `Dispensaire`.
+- [CommandeRepository](src/main/java/pharmacie/dao/CommandeRepository.java): Interface gérant les requêtes sur les entités `Commande`.
+- [LigneRepository](src/main/java/pharmacie/dao/LigneRepository.java): Interface gérant les requêtes sur les entités `Ligne`.
 
 ### Couche "Services métier"
 
 Cette couche définit les services métier transactionnels qui utilisent la couche "Accès aux données" pour effectuer des opérations complexes.
 
-- [CommandeService](src/main/java/comptoirs/service/CommandeService.java): Gère les commandes de médicaments en assurant le respect des règles métier (vérification des stocks, calcul des totaux, gestion des dispensaires).
+- [CommandeService](src/main/java/pharmacie/service/CommandeService.java): Gère les commandes de médicaments en assurant le respect des règles métier (vérification des stocks, calcul des totaux, gestion des dispensaires).
 
 
 ### Couche "Web"
 #### Contrôleurs REST
 Les contrôleurs exposent les points d'entrée REST pour interagir avec l'application.
 
-- [CommandeController](src/main/java/comptoirs/rest/CommandeController.java): Fournit une API web permettant l'accès au service métier [CommandeService](src/main/java/comptoirs/service/CommandeService.java).
-- [StatisticsRestController](src/main/java/comptoirs/rest/StatisticsRestController.java): Fournit des statistiques sur les médicaments par catégorie.
-- [SimpleRestController](src/main/java/comptoirs/rest/SimpleRestController.java): Fournit des endpoints simples pour interroger les catégories, médicaments et dispensaires.
+- [CommandeController](src/main/java/pharmacie/rest/CommandeController.java): Fournit une API web permettant l'accès au service métier [CommandeService](src/main/java/pharmacie/service/CommandeService.java).
+- [SimpleRestController](src/main/java/pharmacie/rest/SimpleRestController.java): Fournit des endpoints simples pour interroger les catégories, médicaments et dispensaires.
 - une [API de télechargement d'images](doc/API_UPLOAD_IMAGE.md) est fournie pour renseigner les images des médicaments
 - L'application esn configurée pour permettre l'[accès Cross-Origin (CORS)](doc/CORS_CONFIGURATION.md) depuis n'importe quelle origine.
 
 #### Contrôleurs MVC
-- [StatsMVCController](src/main/java/comptoirs/mvc/StatsMVCController.java): Fournit des vues HTML avec Thymeleaf pour les statistiques.
+- [StatsMVCController](src/main/java/pharmacie/mvc/StatsMVCController.java): Fournit des vues HTML avec Thymeleaf pour les statistiques.
 
 #### Documentation API
 L'application expose sa documentation OpenAPI/Swagger à l'adresse : `http://localhost:8080/swagger-ui.html`
